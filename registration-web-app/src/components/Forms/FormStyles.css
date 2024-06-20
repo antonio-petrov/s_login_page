@@ -109,6 +109,11 @@ form {
   .form-section {
     padding: 20px;
   }
+  .logo {
+    position: absolute;
+    top: -10px;
+    left: -15px;
+  }
 }
 
 .form-group {
@@ -237,10 +242,6 @@ button:hover {
   color: #3949ab;
   text-decoration: none;
   font-size: 14px;
-}
-
-.footer-link:hover {
-  text-decoration: underline;
 }
 
 .empty-button {
