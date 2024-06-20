@@ -1,5 +1,5 @@
-import React from 'react';
-import { loginUser } from '../../services/apiService';
+import React, { useState } from 'react';
+import { registerUser } from '../../services/apiService';
 import './FormStyles.css';
 import Input from '../SharedComponents/Inputs/Input';
 import Button from '../SharedComponents/Buttons/Button';
@@ -7,16 +7,26 @@ import WelcomeSection from '../Sections/WelcomeSection';
 import FormContainer from './FormContainer';
 import useFormHandler from '../../hooks/useFormHandler';
 import ErrorMessage from '../Errors/ErrorMessage';
+import EmailIconSvg from '../../assets/email';
+import LockIconSvg from '../../assets/lock';
+import GoogleLogoSvg from '../../assets/google';
+import FacebookLogoSvg from '../../assets/facebook';
+import ShowPasswordSvg from '../../assets/showPassword';
 
 const LoginForm: React.FC = () => {
   const { formData, handleChange, handleSubmit, error } =
-    useFormHandler(loginUser);
+    useFormHandler(registerUser);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <FormContainer>
       <WelcomeSection
-        heading='Welcome back!'
-        subtext='Enter your details to log in'
+        heading='Welcome aboard my friend'
+        subtext='Just a couple of clicks and we start'
       />
       <div className='form-section'>
         <h2>Log in</h2>
@@ -28,20 +38,53 @@ const LoginForm: React.FC = () => {
             value={formData.email}
             onChange={handleChange}
             ariaLabel='Email'
+            placeholder='Email'
+            icon={<EmailIconSvg />}
           />
           <Input
             id='password'
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             value={formData.password}
             onChange={handleChange}
             ariaLabel='Password'
+            placeholder='Password'
+            icon={<LockIconSvg />}
           />
-          <Button type='submit' label='Log in' />
+          <span
+            className='show-password-icon'
+            onClick={togglePasswordVisibility}
+          >
+            <ShowPasswordSvg />
+          </span>
+          <div className='form-group forgot-password-container'>
+            <a href='/forgot-password' className='forgot-password-link'>
+              Forgot password?
+            </a>
+          </div>
+          <Button type='submit' label='Login' />
+          <div className='separator-container'>
+            <hr className='separator' />
+            <span>Or</span>
+            <hr className='separator' />
+          </div>
+          <div className='sso-buttons'>
+            <button className='google-button'>
+              <GoogleLogoSvg className='social-icon' /> Google
+            </button>
+            <button className='facebook-button'>
+              <FacebookLogoSvg className='social-icon' /> Facebook
+            </button>
+          </div>
+          <div className='footer-links'>
+            <span className='footer-link'>Have no account yet?</span>
+          </div>
+          <Button
+            className='empty-button'
+            type='button'
+            label='Register'
+            onClick={() => (window.location.href = '/register')}
+          />
         </form>
-        <div className='extra-buttons'>
-          <Button type='button' label='Google' className='google-button' />
-          <Button type='button' label='Facebook' className='facebook-button' />
-        </div>
       </div>
     </FormContainer>
   );

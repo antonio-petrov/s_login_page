@@ -22,6 +22,10 @@ const RegistrationForm: React.FC = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleLoginClick = () => {
+    window.location.href = '/login';
+  };
+
   return (
     <FormContainer>
       <WelcomeSection
@@ -76,11 +80,14 @@ const RegistrationForm: React.FC = () => {
             </button>
           </div>
           <div className='footer-links'>
-            <a href='/register' className='footer-link'>
-              Have no account yet?
-            </a>
+            <span className='footer-link'>Already have an account?</span>
           </div>
-          <Button className='empty-button' type='button' label='Login' />
+          <Button
+            className='empty-button'
+            type='button'
+            label='Login'
+            onClick={handleLoginClick}
+          />
         </form>
       </div>
     </FormContainer>
