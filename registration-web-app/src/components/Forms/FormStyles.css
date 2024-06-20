@@ -1,0 +1,274 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #5769d4;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 1220px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  min-height: 85vh;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .form-container {
+    flex-direction: row;
+  }
+}
+
+.welcome-section {
+  flex: 1;
+  background-color: #3949ab;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+}
+
+.logo-image {
+  margin-top: 30px;
+  margin-left: 30px;
+  width: 60px;
+  height: auto;
+}
+
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: -50px;
+  margin-left: 35px;
+}
+
+.person-container {
+  width: 277.81px;
+  height: 277.81px;
+  background-color: #00227b;
+  border-radius: 200px;
+}
+
+.person-image {
+  width: 357px;
+  height: auto;
+  margin-left: -24px;
+  margin-top: -22px;
+}
+
+.welcome-text {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 100;
+  padding-top: 40px;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #ffffff;
+}
+
+.form-section {
+  margin-top: -10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 0px;
+  max-width: 482px;
+  color: #3949ab;
+  font-weight: 200;
+  font-family: 'Lato', sans-serif;
+}
+
+form {
+  width: 74%;
+  position: relative;
+  padding-top: 50px;
+}
+
+@media (max-width: 768px) {
+  .form-section {
+    padding: 20px;
+  }
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ccc;
+}
+
+.input-with-icon {
+  padding-left: 40px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 85%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input:focus-visible {
+  outline: 2px solid #bbc0e1;
+  border: 1px solid #5769d4;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3949ab;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  margin-top: 10px;
+  height: 40px;
+}
+
+button:hover {
+  background-color: #27368f;
+}
+
+.sso-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.google-button,
+.facebook-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48%;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  cursor: pointer;
+  background-color: white;
+  color: #3949ab;
+}
+.google-button svg,
+.facebook-button svg {
+  padding-right: 10px;
+}
+
+.google-button .social-icon,
+.facebook-button .social-icon {
+  margin-right: 10px;
+}
+
+.google-button:hover,
+.facebook-button:hover {
+  background-color: #f0f0f0;
+}
+
+.separator-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.separator {
+  width: 20%;
+  background-color: #e6e9fa;
+  height: 1px;
+  border: 0;
+  margin: 0px 10px 0px 10px;
+}
+
+.footer-link {
+  color: #7b7b7b;
+  text-decoration: none;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.forgot-password-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.forgot-password-link {
+  color: #3949ab;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.empty-button {
+  background-color: white;
+  color: #3949ab;
+  border: 1px solid #3949ab;
+}
+
+.empty-button:hover {
+  background-color: #f0f0f0;
+  color: #3949ab;
+  border: 1px solid #3949ab;
+}
+.password-input-container {
+  position: relative;
+}
+
+.show-password-icon {
+  position: absolute;
+  right: 12px;
+  top: 26%;
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}

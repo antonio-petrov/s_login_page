@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+motor
+passlib[bcrypt]
+python-jose
+openai
+azure-identity
+azure-mgmt-web

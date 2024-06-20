@@ -1,0 +1,157 @@
+// sharedStyles.js
+import { ScaledSheet } from 'react-native-size-matters';
+
+const sharedStyles = ScaledSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '35@s',
+        backgroundColor: '#fff',
+    },
+    logoContainer: {
+        marginBottom: '28@vs',
+    },
+    title: {
+        fontSize: '21@ms',
+        marginBottom: '47@vs',
+        color: '#3949AB',
+    },
+    topView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        height: '38@vs',
+        paddingHorizontal: '12@s',
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: '8@s',
+        backgroundColor: '#FFFFFF',
+        position: 'absolute',
+        top: 0,
+        justifyContent: 'center',
+    },
+    topViewFocused: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        height: '38@vs',
+        paddingHorizontal: '12@s',
+        borderWidth: 1,
+        borderColor: '#5769D4',
+        borderRadius: '8@s',
+        backgroundColor: '#FFFFFF',
+        position: 'absolute',
+        top: 0,
+        justifyContent: 'center',
+    },
+    shadowView: {
+        position: 'absolute',
+        top: 3,
+        width: '100%',
+        zIndex: -10,
+        borderRadius: '8@s',
+        backgroundColor: '#ccc',
+    },
+    shadowViewFocused: {
+        position: 'absolute',
+        top: 3,
+        width: '100%',
+        zIndex: -10,
+        borderRadius: '8@s',
+        backgroundColor: '#5769D4',
+    },
+    input: {
+        flex: 1,
+        fontSize: '14@ms',
+        height: '100%',
+        color: '#323232',
+    },
+    button: {
+        width: '100%',
+        padding: '11@ms',
+        backgroundColor: '#3949AB',
+        borderRadius: '40@s',
+        alignItems: 'center',
+        marginBottom: '8@vs',
+        marginTop: '7@vs',
+    },
+    buttonPressed: {
+        backgroundColor: '#27368F',
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: '16@ms',
+    },
+    orContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: '0@vs',
+        marginBottom: '4@vs',
+    },
+    line: {
+        flex: 0.4,
+        height: 1,
+        backgroundColor: '#E6E9FA',
+    },
+    orText: {
+        marginHorizontal: '10@s',
+        fontSize: '14@ms',
+        color: '#aaa',
+    },
+    socialLogin: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginBottom: '22@vs',
+    },
+    socialButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '10@ms',
+        borderRadius: '40@s',
+        width: '48%',
+        borderWidth: 1,
+        borderColor: '#3949AB',
+        backgroundColor: '#FFFFFF',
+    },
+    socialButtonPressed: {
+        backgroundColor: '#F0F0F0',
+    },
+    socialButtonTextGoogle: {
+        color: '#3949AB',
+        marginLeft: '10@s',
+    },
+    socialButtonText: {
+        color: '#3949AB',
+        marginLeft: '10@s',
+        fontSize: '14@ms',
+    },
+    noAccount: {
+        fontSize: '14@ms',
+        color: '#aaa',
+    },
+    register: {
+        color: '#3949AB',
+        marginTop: '10@vs',
+    },
+    navigationButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '10@ms',
+        borderRadius: '40@s',
+        width: '100%',
+        borderWidth: 1,
+        borderColor: '#3949AB',
+        backgroundColor: '#FFFFFF',
+        marginTop: '10@vs',
+    },
+    navigationButtonText: {
+        color: '#3949AB',
+        fontSize: '14@ms',
+    },
+});
+
+export default sharedStyles;
