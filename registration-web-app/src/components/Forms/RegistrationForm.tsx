@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { registerUser } from '../../services/apiService';
 import './FormStyles.css';
 import Input from '../SharedComponents/Inputs/Input';
@@ -8,23 +8,14 @@ import FormContainer from './FormContainer';
 import useFormHandler from '../../hooks/useFormHandler';
 import ErrorMessage from '../Errors/ErrorMessage';
 import EmailIconSvg from '../../assets/email';
-import LockIconSvg from '../../assets/lock';
-import GoogleLogoSvg from '../../assets/google';
-import FacebookLogoSvg from '../../assets/facebook';
-import ShowPasswordSvg from '../../assets/showPassword';
+import SocialButtons from '../SharedComponents/SocialButtons/SocialButtons';
+import PasswordInput from '../SharedComponents/Inputs/PasswordInput';
+import FormFooter from '../SharedComponents/FormFooter/FormFooter';
+import { ToastContainer } from 'react-toastify';
 
 const RegistrationForm: React.FC = () => {
   const { formData, handleChange, handleSubmit, error } =
     useFormHandler(registerUser);
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleLoginClick = () => {
-    window.location.href = '/login';
-  };
 
   return (
     <FormContainer>
@@ -45,21 +36,7 @@ const RegistrationForm: React.FC = () => {
             placeholder='Email'
             icon={<EmailIconSvg />}
           />
-          <Input
-            id='password'
-            type={showPassword ? 'text' : 'password'}
-            value={formData.password}
-            onChange={handleChange}
-            ariaLabel='Password'
-            placeholder='Password'
-            icon={<LockIconSvg />}
-          />
-          <span
-            className='show-password-icon'
-            onClick={togglePasswordVisibility}
-          >
-            <ShowPasswordSvg />
-          </span>
+          <PasswordInput value={formData.password} onChange={handleChange} />
           <div className='form-group forgot-password-container'>
             <a href='/forgot-password' className='forgot-password-link'>
               Forgot password?
@@ -71,25 +48,16 @@ const RegistrationForm: React.FC = () => {
             <span>Or</span>
             <hr className='separator' />
           </div>
-          <div className='sso-buttons'>
-            <button className='google-button'>
-              <GoogleLogoSvg className='social-icon' /> Google
-            </button>
-            <button className='facebook-button'>
-              <FacebookLogoSvg className='social-icon' /> Facebook
-            </button>
-          </div>
-          <div className='footer-links'>
-            <span className='footer-link'>Already have an account?</span>
-          </div>
-          <Button
-            className='empty-button'
-            type='button'
-            label='Login'
-            onClick={handleLoginClick}
+          <SocialButtons />
+          <FormFooter
+            linkText='Already have an account?'
+            linkHref='/login'
+            buttonText='Login'
+            buttonAction={() => (window.location.href = '/login')}
           />
         </form>
       </div>
+      <ToastContainer />
     </FormContainer>
   );
 };

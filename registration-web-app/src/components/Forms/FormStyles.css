@@ -244,10 +244,6 @@ button:hover {
   font-size: 14px;
 }
 
-.footer-link:hover {
-  text-decoration: underline;
-}
-
 .empty-button {
   background-color: white;
   color: #3949ab;
