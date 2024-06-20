@@ -109,6 +109,11 @@ form {
   .form-section {
     padding: 20px;
   }
+  .logo {
+    position: absolute;
+    top: -10px;
+    left: -15px;
+  }
 }
 
 .form-group {
