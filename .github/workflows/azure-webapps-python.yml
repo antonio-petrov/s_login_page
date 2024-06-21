@@ -89,17 +89,3 @@ jobs:
         run: |
           ls -la
           
-      - name: Extract the outer tar.gz file created by Azure
-        run: |
-          tar -xvf output.tar.gz
-
-      - name: Extract the inner tar file
-        run: |
-          tar -xvf output.tar
-
-      - name: Move files from the '.' directory to root
-        run: |
-          cd /output && mv ./* /
-
-      - name: Remove extracted directories
-        run: rm -rf /wwwroot/output /wwwroot/backend
