@@ -5,7 +5,7 @@ from passlib.context import CryptContext
 from pydantic import BaseModel
 from datetime import datetime, timedelta
 from motor.motor_asyncio import AsyncIOMotorClient
-import openai
+from openai import OpenAI
 import config
 
 app = FastAPI()
@@ -20,7 +20,7 @@ users_collection = db.users
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # OpenAI setup
-openai.api_key = config.settings.OPENAI_API_KEY
+openai_client = OpenAI(api_key=config.settings.OPENAI_API_KEY)
 
 class User(BaseModel):
     email: str
@@ -80,6 +80,10 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         raise credentials_exception
     return user
 
+@app.get("/")
+async def hello_world():
+    return {"message": "Hello, World!"}
+
 @app.post("/register", response_model=Token)
 async def register(user: User):
     user.password = get_password_hash(user.password)
@@ -103,10 +107,14 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 
 @app.get("/message")
 async def get_message(current_user: User = Depends(get_current_user)):
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt="give me some random short text",
-        max_tokens=50
+    chat_completion = openai_client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": "Give me some random short text",
+            }
+        ],
+        model="gpt-3.5-turbo-0125",
     )
-    message = response.choices[0].text.strip()
+    message = chat_completion.choices[0].message['content'].strip()
     return {"message": message}
