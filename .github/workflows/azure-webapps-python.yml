@@ -64,6 +64,13 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
+      - name: Move backend files to root
+        run: |
+          mv backend/* ./
+
+      - name: Remove backend directory
+        run: rm -rf backend
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -77,16 +84,4 @@ jobs:
         with:
           app-name: 'sloginpage'
           slot-name: 'production'
-          
-
-      - name: Extract the outer tar.gz file created by Azure
-        run: |
-          tar -xvf output.tar.gz
-
-      - name: Extract the inner tar.gz file
-        run: |
-          tar -xvf output/output.tar.gz
-
-      - name: Move backend files to root
-        run: |
-          mv /* ./
+        
