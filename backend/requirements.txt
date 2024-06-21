@@ -7,3 +7,4 @@ python-jose
 openai
 azure-identity
 azure-mgmt-web
+pydantic-settings
