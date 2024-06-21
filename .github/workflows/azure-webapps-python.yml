@@ -85,3 +85,17 @@ jobs:
           app-name: 'sloginpage'
           slot-name: 'production'
         
+      - name: Extract the outer tar.gz file created by Azure
+        run: |
+          cd /home/site/wwwroot && tar -xvf output.tar.gz
+
+      - name: Extract the inner tar file
+        run: |
+          cd /home/site/wwwroot && tar -xvf output.tar
+
+      - name: Move files from the '.' directory to root
+        run: |
+          cd /home/site/wwwroot/output && mv ./* /home/site/wwwroot/
+
+      - name: Remove extracted directories
+        run: rm -rf /home/site/wwwroot/output /home/site/wwwroot/backend
