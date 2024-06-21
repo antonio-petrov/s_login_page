@@ -87,7 +87,7 @@ jobs:
         
       - name: Extract the outer tar.gz file created by Azure
         run: |
-          cd /home/site/wwwroot && tar -xvf output.tar.gz
+          cd /wwwroot && tar -xvf output.tar.gz
 
       - name: Extract the inner tar file
         run: |
@@ -95,7 +95,7 @@ jobs:
 
       - name: Move files from the '.' directory to root
         run: |
-          cd /home/site/wwwroot/output && mv ./* /home/site/wwwroot/
+          cd /wwwroot/output && mv ./* /wwwroot/
 
       - name: Remove extracted directories
-        run: rm -rf /home/site/wwwroot/output /home/site/wwwroot/backend
+        run: rm -rf /wwwroot/output /wwwroot/backend
