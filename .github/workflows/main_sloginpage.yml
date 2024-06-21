@@ -75,3 +75,6 @@ jobs:
           app-name: 'sloginpage'
           slot-name: 'Production'
           
+          
+      - name: Delete release.zip
+        run: rm release.zip
