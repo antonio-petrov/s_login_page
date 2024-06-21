@@ -33,12 +33,15 @@ pip install -r requirements.txt
 
 
 ## How to run web app
+![web app screenshot](https://i.imgur.com/fYQ5j3G.png)
 ```
 cd registration-web-app
 
 npm start
 ```
 ## How to run mobile app
+![mobile app screenshots](https://i.imgur.com/MhycoUw.png)
+
 ```
 cd RegistrationApp
 
