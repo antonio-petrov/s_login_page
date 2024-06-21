@@ -20,8 +20,6 @@ https://www.figma.com/design/5ICsJ7GrvhxsxeKG6aqDD1/Login-page-(Test)-(Copy)?nod
 
 # Solution:
 
-[React web app solution](https://s-login-page.vercel.app/)
-
 ## How to run backend:
 ```
 python -m venv venv
@@ -33,12 +31,17 @@ pip install -r requirements.txt
 
 
 ## How to run web app
+[React web app solution](https://s-login-page.vercel.app/)
+
+![web app screenshot](https://i.imgur.com/fYQ5j3G.png)
 ```
 cd registration-web-app
 
 npm start
 ```
 ## How to run mobile app
+![mobile app screenshots](https://i.imgur.com/MhycoUw.png)
+
 ```
 cd RegistrationApp
 
