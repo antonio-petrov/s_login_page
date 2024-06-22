@@ -6,6 +6,7 @@ import './components/SharedComponents/Toasts/ToastStyles.css';
 import RegistrationForm from './components/Forms/RegistrationForm';
 import LoginForm from './components/Forms/LoginForm';
 import ForgotPasswordForm from './components/Forms/ForgotPasswordForm';
+import MessagePage from './components/MessagePage/MessagePage';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
           <Route path='/register' element={<RegistrationForm />} />
           <Route path='/' element={<LoginForm />} />
           <Route path='/forgot-password' element={<ForgotPasswordForm />} />
+          <Route path='/message' element={<MessagePage />} />
         </Routes>
       </Router>
       <ToastContainer
