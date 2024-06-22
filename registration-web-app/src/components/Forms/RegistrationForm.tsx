@@ -6,7 +6,6 @@ import Button from '../SharedComponents/Buttons/Button';
 import WelcomeSection from '../Sections/WelcomeSection';
 import FormContainer from './FormContainer';
 import useFormHandler from '../../hooks/useFormHandler';
-import ErrorMessage from '../Errors/ErrorMessage';
 import EmailIconSvg from '../../assets/email';
 import SocialButtons from '../SharedComponents/SocialButtons/SocialButtons';
 import PasswordInput from '../SharedComponents/Inputs/PasswordInput';
@@ -14,7 +13,7 @@ import FormFooter from '../SharedComponents/FormFooter/FormFooter';
 import { ToastContainer } from 'react-toastify';
 
 const RegistrationForm: React.FC = () => {
-  const { formData, handleChange, handleSubmit, error } =
+  const { formData, handleChange, handleSubmit, message } =
     useFormHandler(registerUser);
 
   return (
@@ -25,7 +24,7 @@ const RegistrationForm: React.FC = () => {
       />
       <div className='form-section'>
         <h2>Register</h2>
-        {error && <ErrorMessage message={error} />}
+        {message && <p className='success-message'>{message}</p>}
         <form onSubmit={handleSubmit}>
           <Input
             id='email'

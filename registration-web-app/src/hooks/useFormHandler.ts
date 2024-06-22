@@ -1,43 +1,51 @@
-import { useState, useCallback } from 'react';
-import { AxiosResponse } from 'axios';
-import { getRandomText } from '../services/apiService';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { toast } from 'react-toastify';
+import { loginUser, registerUser, getRandomText } from '../services/apiService';
 
-const useFormHandler = (
-    submitHandler: (email: string, password: string) => Promise<AxiosResponse<any>>
-) => {
-    const [formData, setFormData] = useState({ email: '', password: '' });
-    const [toastMessage, setToastMessage] = useState('');
-    const [error, setError] = useState('');
+interface FormData {
+    email: string;
+    password: string;
+}
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+const useFormHandler = (apiFunction: (email: string, password: string) => Promise<any>) => {
+    const [formData, setFormData] = useState<FormData>({ email: '', password: '' });
+    const [message, setMessage] = useState<string>('');
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, [id]: value }));
+        setFormData((prevState) => ({ ...prevState, [id]: value }));
     };
 
-    const handleSubmit = useCallback(
-        async (e: React.FormEvent) => {
-            e.preventDefault();
-            const { email, password } = formData;
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const response = await apiFunction(formData.email, formData.password);
+            const token = response.data.access_token;
+            localStorage.setItem('token', token);
 
-            if (!email || !password) {
-                setError('All fields are required');
-                return;
-            }
+            const textResponse = await getRandomText();
+            setMessage(textResponse.data.message);
+            toast.success('Operation successful', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        } catch (err) {
+            toast.error('An error occurred. Please try again.', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        }
+    };
 
-            try {
-                await submitHandler(email, password);
-                const response = await getRandomText();
-                setToastMessage(response.data.message);
-                alert(response.data.message);
-            } catch (error) {
-                console.error('Error during submission', error);
-                setError('Submission failed. Please try again.');
-            }
-        },
-        [formData, submitHandler]
-    );
-
-    return { formData, handleChange, handleSubmit, error, toastMessage };
+    return { formData, handleChange, handleSubmit, message };
 };
 
 export default useFormHandler;

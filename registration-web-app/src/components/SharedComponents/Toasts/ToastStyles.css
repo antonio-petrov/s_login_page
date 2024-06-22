@@ -1,0 +1,31 @@
+.Toastify__toast-container {
+  position: fixed !important;
+  top: 1em !important;
+  right: 1em !important;
+  left: auto !important;
+  bottom: auto !important;
+  z-index: 9999 !important;
+  width: auto !important;
+  max-width: 350px !important;
+}
+
+.Toastify__toast {
+  min-width: 200px;
+  background-color: #ffffff;
+  color: #333333;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Toastify__toast--error {
+  background-color: #f44336;
+  color: #ffffff;
+}
+
+.Toastify__close-button {
+  color: #ffffff;
+}
+
+.Toastify__progress-bar {
+  background-color: rgba(255, 255, 255, 0.7);
+}
