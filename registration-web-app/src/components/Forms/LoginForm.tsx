@@ -1,21 +1,21 @@
 import React from 'react';
-import { registerUser } from '../../services/apiService';
+import { loginUser } from '../../services/apiService';
 import './FormStyles.css';
 import Input from '../SharedComponents/Inputs/Input';
 import Button from '../SharedComponents/Buttons/Button';
 import WelcomeSection from '../Sections/WelcomeSection';
 import FormContainer from './FormContainer';
 import useFormHandler from '../../hooks/useFormHandler';
-import ErrorMessage from '../Errors/ErrorMessage';
 import EmailIconSvg from '../../assets/email';
 import SocialButtons from '../SharedComponents/SocialButtons/SocialButtons';
 import PasswordInput from '../SharedComponents/Inputs/PasswordInput';
 import FormFooter from '../SharedComponents/FormFooter/FormFooter';
 import { ToastContainer } from 'react-toastify';
+import '../SharedComponents/Toasts/ToastStyles.css';
 
 const LoginForm: React.FC = () => {
-  const { formData, handleChange, handleSubmit, error } =
-    useFormHandler(registerUser);
+  const { formData, handleChange, handleSubmit, message } =
+    useFormHandler(loginUser);
 
   return (
     <FormContainer>
@@ -25,7 +25,7 @@ const LoginForm: React.FC = () => {
       />
       <div className='form-section'>
         <h2>Log in</h2>
-        {error && <ErrorMessage message={error} />}
+        {message && <p className='success-message'>{message}</p>}
         <form onSubmit={handleSubmit}>
           <Input
             id='email'
@@ -57,7 +57,7 @@ const LoginForm: React.FC = () => {
           />
         </form>
       </div>
-      <ToastContainer />
+      <ToastContainer position='top-right' autoClose={5000} />
     </FormContainer>
   );
 };
