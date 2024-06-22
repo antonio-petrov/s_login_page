@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginUser, getRandomText } from '../services/apiService';
+import { loginUser, getRandomText } from '../../services/apiService';
 import './FormStyles.css';
 import WebAppPersonImage from '../../assets/WebAppPersonImage.svg';
 
