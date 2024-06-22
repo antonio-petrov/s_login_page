@@ -11,6 +11,7 @@ import SocialLoginButtons from '../common/SocialLoginButtons';
 import { ScaledSheet } from 'react-native-size-matters';
 import axios, { AxiosError } from 'axios';
 import { API_URL } from '../../../config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface LoginFormProps {
   onRegister: () => void;
@@ -32,6 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onRegister, onLogin }) => {
           password,
         });
         console.log(response.data);
+        await AsyncStorage.setItem('access_token', response.data.access_token);
         onLogin(email, password);
       } catch (err) {
         const error = err as AxiosError;

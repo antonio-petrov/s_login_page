@@ -10,6 +10,7 @@ import InputField from '../common/InputField';
 import SocialLoginButtons from '../common/SocialLoginButtons';
 import axios, { AxiosError } from 'axios';
 import { API_URL } from '../../../config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface RegisterFormProps {
   onRegister: (email: string, password: string) => void;
@@ -31,6 +32,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onLogin }) => {
           password,
         });
         console.log(response.data);
+        await AsyncStorage.setItem('access_token', response.data.access_token);
         onRegister(email, password);
       } catch (err) {
         const error = err as AxiosError;
