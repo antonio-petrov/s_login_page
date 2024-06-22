@@ -22,12 +22,12 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods (GET, POST, PUT, DELETE, OPTIONS, etc.)
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # MongoDB setup
-client = AsyncIOMotorClient(config.settings.MONGO_URI)
+client = AsyncIOMotorClient(settings.MONGO_URI)
 db = client.user_db
 users_collection = db.users
 
@@ -35,7 +35,7 @@ users_collection = db.users
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # OpenAI setup
-openai_client = OpenAI(api_key=config.settings.OPENAI_API_KEY)
+openai_client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
 class User(BaseModel):
     email: str
@@ -61,7 +61,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     else:
         expire = datetime.utcnow() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, config.settings.SECRET_KEY, algorithm=config.settings.ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     return encoded_jwt
 
 async def get_user(email: str):
@@ -83,7 +83,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
-        payload = jwt.decode(token, config.settings.SECRET_KEY, algorithms=[config.settings.ALGORITHM])
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         email: str = payload.get("sub")
         if email is None:
             raise credentials_exception
@@ -103,7 +103,7 @@ async def hello_world():
 async def register(user: User):
     user.password = get_password_hash(user.password)
     await users_collection.insert_one(user.dict())
-    access_token_expires = timedelta(minutes=config.settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": user.email}, expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "bearer"}
 
@@ -116,7 +116,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=config.settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": user["email"]}, expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "bearer"}
 
