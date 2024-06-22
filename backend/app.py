@@ -7,9 +7,24 @@ from datetime import datetime, timedelta
 from motor.motor_asyncio import AsyncIOMotorClient
 from openai import OpenAI
 import config
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+origins = [
+    "http://localhost:3000",
+    "https://s-login-page.vercel.app", 
+    "https://s-login-page-em6ow3bq2-antonio-petrovs-projects.vercel.app"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, PUT, DELETE, OPTIONS, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 # MongoDB setup
 client = AsyncIOMotorClient(config.settings.MONGO_URI)
