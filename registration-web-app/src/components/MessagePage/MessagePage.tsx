@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getRandomText } from '../../services/apiService';
+import './MessagePage.css';
 
 const MessagePage: React.FC = () => {
   const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
+    console.log('useEffect called');
     const fetchMessage = async () => {
       try {
         const response = await getRandomText();
