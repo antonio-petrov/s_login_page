@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { registerUser, getRandomText } from '../services/apiService';
+import { registerUser, getRandomText } from '../../services/apiService';
 import './FormStyles.css';
 import WebAppPersonImage from '../../assets/WebAppPersonImage.svg';
 
 const RegistrationForm: React.FC = () => {
-  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [toastMessage, setToastMessage] = useState('');
@@ -12,12 +11,12 @@ const RegistrationForm: React.FC = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username || !password || !email) {
+    if (!password || !email) {
       setError('All fields are required');
       return;
     }
     try {
-      await registerUser(username, password, email);
+      await registerUser(password, email);
       const response = await getRandomText();
       const randomText = response.data.message;
       setToastMessage(randomText);
@@ -48,16 +47,6 @@ const RegistrationForm: React.FC = () => {
           <h2>Register</h2>
           {error && <p className='error-message'>{error}</p>}
           <form onSubmit={handleRegister}>
-            <div className='form-group'>
-              <label htmlFor='username'>Username</label>
-              <input
-                type='text'
-                id='username'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                aria-label='Username'
-              />
-            </div>
             <div className='form-group'>
               <label htmlFor='password'>Password</label>
               <input

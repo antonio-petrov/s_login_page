@@ -11,5 +11,10 @@ export const loginUser = (email: string, password: string) => {
 };
 
 export const getRandomText = () => {
-    return axios.get(`${API_URL}/random-text`);
+    const token = localStorage.getItem('token');
+    return axios.get(`${API_URL}/message`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
 };

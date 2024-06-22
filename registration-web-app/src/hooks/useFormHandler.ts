@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { loginUser, registerUser } from '../services/apiService';
+import { loginUser, registerUser, getRandomText } from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
 
 interface FormData {
