@@ -99,6 +99,27 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 async def hello_world():
     return {"message": "Hello, World!"}
 
+@app.get("/test-mongo")
+async def test_mongo_connection():
+    try:
+        # Create a new client and connect (force a new connection)
+        client = AsyncIOMotorClient(settings.MONGO_URI, serverSelectionTimeoutMS=5000)
+        
+        # The ismaster command is cheap and does not require auth.
+        await client.admin.command('ismaster')
+        
+        # If we get here, the connection was successful
+        return {
+            "message": "Successfully connected to MongoDB",
+            "mongo_uri": settings.MONGO_URI.split('@')[-1]  # Only show the host part for security
+        }
+    except Exception as e:
+        # If an exception occurs, the connection failed
+        raise HTTPException(status_code=500, detail=f"Failed to connect to MongoDB: {str(e)}")
+    finally:
+        # Always close the client
+        client.close()
+        
 @app.post("/register", response_model=Token)
 async def register(user: User):
     user.password = get_password_hash(user.password)
