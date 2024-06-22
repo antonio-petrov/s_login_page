@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from datetime import datetime, timedelta
 from motor.motor_asyncio import AsyncIOMotorClient
 from openai import OpenAI
-import config
+from config import settings
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
