@@ -12,8 +12,8 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     navigation.navigate('Register');
   };
 
-  const handleOnLoginClick = () => {
-    console.log('Login button clicked');
+  const handleOnLoginClick = (email: string, password: string) => {
+    console.log('Login button clicked', email, password);
     navigation.navigate('Welcome');
   };
 

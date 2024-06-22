@@ -1,6 +1,7 @@
-import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import sharedStyles from '../../styles/sharedStyles';
+import EyeIconSvg from '../svg/eye';
 
 interface InputFieldProps {
   value: string;
@@ -10,6 +11,7 @@ interface InputFieldProps {
   placeholder: string;
   icon: React.ReactNode;
   focused: boolean;
+  secureTextEntry?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -20,21 +22,34 @@ const InputField: React.FC<InputFieldProps> = ({
   placeholder,
   icon,
   focused,
-}) => (
-  <View style={{ width: '100%', height: 50, marginBottom: 10 }}>
-    <View style={focused ? sharedStyles.topViewFocused : sharedStyles.topView}>
-      {icon}
-      <TextInput
-        style={sharedStyles.input}
-        placeholder={placeholder}
-        value={value}
-        onChangeText={onChangeText}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      />
+  secureTextEntry = false,
+}) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <View style={{ width: '100%', height: 50, marginBottom: 10 }}>
+      <View
+        style={focused ? sharedStyles.topViewFocused : sharedStyles.topView}
+      >
+        {icon}
+        <TextInput
+          style={sharedStyles.input}
+          placeholder={placeholder}
+          value={value}
+          onChangeText={onChangeText}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          secureTextEntry={secureTextEntry && !showPassword}
+        />
+        {secureTextEntry && (
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <EyeIconSvg />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 export default InputField;
 
