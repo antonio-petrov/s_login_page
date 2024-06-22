@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Logo from '../svg/logo';
 import EmailIconSvg from '../svg/email';
 import LockIconSvg from '../svg/lock';
@@ -8,6 +8,8 @@ import { showToast } from '../../utils/toastUtils';
 import Button from '../common/Button';
 import InputField from '../common/InputField';
 import SocialLoginButtons from '../common/SocialLoginButtons';
+import axios, { AxiosError } from 'axios';
+import { API_URL } from '../../../config';
 
 interface RegisterFormProps {
   onRegister: (email: string, password: string) => void;
@@ -21,9 +23,23 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onLogin }) => {
     null
   );
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (email && password) {
-      onRegister(email, password);
+      try {
+        const response = await axios.post(`${API_URL}/register`, {
+          email,
+          password,
+        });
+        console.log(response.data);
+        onRegister(email, password);
+      } catch (err) {
+        const error = err as AxiosError;
+        if (error.response && error.response.status === 400) {
+          showToast('The email is already in use.');
+        } else {
+          showToast('Registration failed');
+        }
+      }
     } else {
       showToast('Please enter email and password');
     }
@@ -65,7 +81,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onLogin }) => {
         onFacebookPress={() => showToast('Button does not do anything yet')}
       />
       <Text style={sharedStyles.noAccount}>Already have an account?</Text>
-      <Button onPress={onLogin} title="Log in" />
+      <TouchableOpacity style={sharedStyles.navigationButton} onPress={onLogin}>
+        <Text style={sharedStyles.navigationButtonText}>Log in</Text>
+      </TouchableOpacity>
     </View>
   );
 };

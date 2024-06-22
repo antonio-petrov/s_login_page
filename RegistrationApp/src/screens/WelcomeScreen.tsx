@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { showToast } from '../utils/toastUtils';
+import { API_URL } from '../../config';
 
 const WelcomeScreen: React.FC = () => {
   useEffect(() => {
-    fetch('https://your-backend-endpoint.com/message')
+    fetch(`${API_URL}/message`)
       .then(response => response.json())
       .then(data => {
         showToast(data.message);

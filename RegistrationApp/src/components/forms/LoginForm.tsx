@@ -9,6 +9,8 @@ import Button from '../common/Button';
 import InputField from '../common/InputField';
 import SocialLoginButtons from '../common/SocialLoginButtons';
 import { ScaledSheet } from 'react-native-size-matters';
+import axios, { AxiosError } from 'axios';
+import { API_URL } from '../../../config';
 
 interface LoginFormProps {
   onRegister: () => void;
@@ -22,9 +24,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ onRegister, onLogin }) => {
     null
   );
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (email && password) {
-      onLogin(email, password);
+      try {
+        const response = await axios.post(`${API_URL}/login`, {
+          email,
+          password,
+        });
+        console.log(response.data);
+        onLogin(email, password);
+      } catch (err) {
+        const error = err as AxiosError;
+        if (error.response && error.response.status === 401) {
+          showToast('Invalid email or password');
+        } else {
+          showToast('Login failed');
+        }
+      }
     } else {
       showToast('Please enter email and password');
     }
@@ -72,7 +88,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onRegister, onLogin }) => {
         onFacebookPress={() => showToast('Button does not do anything yet')}
       />
       <Text style={sharedStyles.noAccount}>Have no account yet?</Text>
-      <Button onPress={onRegister} title="Register" />
+      <TouchableOpacity
+        style={sharedStyles.navigationButton}
+        onPress={onRegister}
+      >
+        <Text style={sharedStyles.navigationButtonText}>Register</Text>
+      </TouchableOpacity>
     </View>
   );
 };
