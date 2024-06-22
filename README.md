@@ -40,7 +40,7 @@ cd registration-web-app
 npm start
 ```
 ## How to run mobile app
-![mobile app screenshots](https://i.imgur.com/MhycoUw.png)
+![mobile app screenshots](https://i.imgur.com/fSADz83.png)
 
 ```
 cd RegistrationApp
