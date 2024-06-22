@@ -122,6 +122,12 @@ async def test_mongo_connection():
         
 @app.post("/register", response_model=Token)
 async def register(user: User):
+    existing_user = await get_user(user.email)
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="User already exists"
+        )
     user.password = get_password_hash(user.password)
     await users_collection.insert_one(user.dict())
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
