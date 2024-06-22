@@ -23,7 +23,12 @@
 }
 
 .Toastify__close-button {
+  width: 30px;
   color: #ffffff;
+}
+
+.Toastify__close-button:hover {
+  background-color: transparent;
 }
 
 .Toastify__progress-bar {

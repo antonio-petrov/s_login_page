@@ -126,7 +126,7 @@ async def register(user: User):
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="User already exists"
+            detail="The email is already in use."
         )
     user.password = get_password_hash(user.password)
     await users_collection.insert_one(user.dict())
