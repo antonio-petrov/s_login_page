@@ -52,6 +52,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onLogin }) => {
         placeholder="Password"
         icon={<LockIconSvg />}
         focused={focusedInput === 'password'}
+        secureTextEntry={true}
       />
       <Button onPress={handleRegister} title="Register" />
       <View style={sharedStyles.orContainer}>

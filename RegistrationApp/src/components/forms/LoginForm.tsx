@@ -53,6 +53,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onRegister, onLogin }) => {
         placeholder="Password"
         icon={<LockIconSvg />}
         focused={focusedInput === 'password'}
+        secureTextEntry={true}
       />
       <TouchableOpacity
         style={styles.forgotPasswordContainer}
