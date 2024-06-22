@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { loginUser, registerUser, getRandomText } from '../services/apiService';
+import { loginUser } from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
 
 interface FormData {
@@ -25,14 +25,6 @@ const useFormHandler = (apiFunction: (email: string, password: string) => Promis
             const token = response.data.access_token;
             localStorage.setItem('token', token);
             navigate('/message');
-            toast.success('Operation successful', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
         } catch (err) {
             toast.error('An error occurred. Please try again.', {
                 position: "top-right",

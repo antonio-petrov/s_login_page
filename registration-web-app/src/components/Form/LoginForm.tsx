@@ -17,10 +17,6 @@ const LoginForm: React.FC = () => {
     }
     try {
       await loginUser(email, password);
-      const response = await getRandomText();
-      const randomText = response.data.message;
-      setToastMessage(randomText);
-      alert(randomText);
     } catch (error) {
       console.error('Error during login', error);
       setError('Login failed. Please try again.');

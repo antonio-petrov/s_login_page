@@ -17,10 +17,6 @@ const RegistrationForm: React.FC = () => {
     }
     try {
       await registerUser(password, email);
-      const response = await getRandomText();
-      const randomText = response.data.message;
-      setToastMessage(randomText);
-      alert(randomText);
     } catch (error) {
       console.error('Error during registration', error);
       setError('Registration failed. Please try again.');
