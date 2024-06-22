@@ -152,5 +152,5 @@ async def get_message(current_user: User = Depends(get_current_user)):
         ],
         model="gpt-3.5-turbo-0125",
     )
-    message = chat_completion.choices[0].message['content'].strip()
+    message = chat_completion.choices[0].message.content.strip()
     return {"message": message}
