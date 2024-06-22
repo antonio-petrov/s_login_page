@@ -1,11 +1,18 @@
+body {
+  background-color: #5769d4;
+}
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: #5769d4;
 }
 
+@media (min-width: 768px) {
+  .container {
+    height: 100vh;
+  }
+}
 .form-container {
   display: flex;
   flex-direction: column;

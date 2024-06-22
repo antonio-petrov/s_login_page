@@ -24,15 +24,27 @@ const useFormHandler = (apiFunction: (email: string, password: string) => Promis
             const token = response.data.access_token;
             localStorage.setItem('token', token);
             navigate('/message');
-        } catch (err) {
-            toast.error('An error occurred. Please try again.', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+        } catch (err: unknown) {
+            if (err && typeof err === 'object' && 'response' in err && err.response) {
+                const errorMessage = (err as any).response.data?.detail || 'An error occurred. Please try again.';
+                toast.error(errorMessage, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
+            } else {
+                toast.error('An error occurred. Please try again.', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
+            }
         }
     };
 
